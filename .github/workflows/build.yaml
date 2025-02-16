@@ -4,9 +4,21 @@ on:
   workflow_dispatch:
   push:
 
-jobs:  
-  bake-image:
-    name: Bake Images
+jobs:
+  metadata:
+    name: Metadata
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+    steps:
+      - shell: bash
+        id: metadata
+        run: |
+          VERSION=$(date -u +"%Y%m%d%H%M%S")
+          echo "version=${VERSION}" > ${GITHUB_OUTPUT}
+  build:
+    name: Build
+    needs: metadata
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -33,20 +45,8 @@ jobs:
           MEMFAULT_PROJECT_KEY: ${{ secrets.MEMFAULT_PROJECT_KEY || '' }}
         run: |
           echo "MEMFAULT_PROJECT_KEY='${MEMFAULT_PROJECT_KEY}'" > .env
-          if [ -n "$GITHUB_REF" ]; then
-            if [[ "$GITHUB_REF" == "refs/tags/"* ]]; then
-              VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
-            else
-              VERSION=$(git describe --tags --abbrev=0)
-              VERSION="${VERSION}+$(git rev-parse --short HEAD)"
-            fi
-          else
-            echo "ERROR: Cannot determine version"
-            exit 1
-          fi
-          echo "MEMFAULT_SOFTWARE_VERSION=${VERSION}" >> .env
+          echo "MEMFAULT_SOFTWARE_VERSION=${{ needs.metadata.outputs.version }}" >> .env
           echo "MEMFAULT_HARDWARE_VERSION=${{ matrix.job.hardware }}" >> .env
-          echo "version=${VERSION}" > ${GITHUB_OUTPUT}
       
       - name: Bake Image
         run: ./run-bakery bake image ${{ matrix.job.system }}
@@ -70,5 +70,5 @@ jobs:
             upload-ota-payload \
             --hardware-version ${{ matrix.job.hardware }} \
             --software-type rugix-debian
-            --software-version ${{ steps.configure.outputs.version }} \
+            --software-version ${{ needs.metadata.outputs.version }} \
             build/${{ matrix.job.system }}/system.rugix
