@@ -1,0 +1,74 @@
+name: Bake Images
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:  
+  bake-image:
+    name: Bake Images
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - system: customized-pi5
+            hardware: rugix-rpi-arm64
+          - system: customized-pi4
+            hardware: rugix-rpi-arm64
+          - system: customized-efi-arm64
+            hardware: rugix-efi-arm64
+          - system: customized-efi-amd64
+            hardware: rugix-efi-amd64
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure `binfmt_misc` for Foreign Architectures
+        run: docker run --privileged --rm tonistiigi/binfmt --install arm64
+      
+      - name: Prepare and Configure
+        shell: bash
+        id: configure
+        env:
+          MEMFAULT_PROJECT_KEY: ${{ secrets.MEMFAULT_PROJECT_KEY || '' }}
+        run: |
+          echo "MEMFAULT_PROJECT_KEY='${MEMFAULT_PROJECT_KEY}'" > .env
+          if [ -n "$GITHUB_REF" ]; then
+            if [[ "$GITHUB_REF" == "refs/tags/"* ]]; then
+              VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+            else
+              VERSION=$(git describe --tags --abbrev=0)
+              VERSION="${VERSION}+$(git rev-parse --short HEAD)"
+            fi
+          else
+            echo "ERROR: Cannot determine version"
+            exit 1
+          fi
+          echo "MEMFAULT_SOFTWARE_VERSION=${VERSION}" >> .env
+          echo "MEMFAULT_HARDWARE_VERSION=${{ matrix.job.hardware }}" >> .env
+          echo "version=${VERSION}" > ${GITHUB_OUTPUT}
+      
+      - name: Bake Image
+        run: ./run-bakery bake image ${{ matrix.job.system }}
+    
+      - name: Bake Bundle
+        run: ./run-bakery bake bundle ${{ matrix.job.system }}
+      
+      - name: Set up Python
+        id: python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      
+      - name: Upload Bundle
+        run: |
+          pip install memfault-cli==1.4.0
+          memfault \
+            --project ${{ secrets.MEMFAULT_PROJECT_SLUG }} \
+            --org ${{ secrets.MEMFAULT_ORG_SLUG }} \
+            --org-token ${{ secrets.MEMFAULT_ORG_TOKEN }} \
+            upload-ota-payload \
+            --hardware-version ${{ matrix.job.hardware }} \
+            --software-type rugix-debian
+            --software-version ${{ steps.configure.outputs.version }} \
+            build/${{ matrix.job.system }}/system.rugix

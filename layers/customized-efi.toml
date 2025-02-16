@@ -1,0 +1,11 @@
+parent = "customized"
+
+recipes = [
+    # Setup Debian for booting via Grub.
+    "core/debian-grub-setup",
+    # Install Memfault configuration.
+    "memfaultd-config",
+]
+
+[parameters.memfaultd-config]
+device_type = "efi"

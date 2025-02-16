@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "MEMFAULT_DEVICE_ID=$(cat /etc/machine-id)"
+echo "MEMFAULT_HARDWARE_VERSION=%%MEMFAULT_HARDWARE_VERSION%%"

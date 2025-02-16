@@ -1,0 +1,4 @@
+description = "configure Memfaultd"
+
+[parameters]
+device_type = {}

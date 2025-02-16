@@ -1,0 +1,21 @@
+parent = "core/debian-bookworm"
+
+recipes = [
+    # Set a static hostname.
+    "core/set-hostname",
+    # Setup and enable SSH.
+    "core/ssh",
+    # Setup the network.
+    "setup-network",
+    # Enable discovery of the system in the local network.
+    "rugix-extra/avahi",
+    # Install Memfault.
+    "install-memfaultd",
+    # Install SSH dev key.
+    "install-ssh-dev-key",
+    # Install a static web page.
+    "hello-world",
+]
+
+[parameters."core/set-hostname"]
+hostname = "rugix-memfault-template"
