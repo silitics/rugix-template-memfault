@@ -1,4 +1,4 @@
-name: Bake Images
+name: Build
 
 on:
   workflow_dispatch:
