@@ -69,6 +69,6 @@ jobs:
             --org-token ${{ secrets.MEMFAULT_ORG_TOKEN }} \
             upload-ota-payload \
             --hardware-version ${{ matrix.job.hardware }} \
-            --software-type rugix-debian
+            --software-type rugix-debian \
             --software-version ${{ needs.metadata.outputs.version }} \
             build/${{ matrix.job.system }}/system.rugix
