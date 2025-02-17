@@ -27,6 +27,6 @@ ln -sf /usr/bin/memfaultd /usr/sbin/memfault-core-handler
 
 install -D -m 755 "${RECIPE_DIR}/files/memfault-device-info" -t /usr/bin
 install -D -m 644 "${RECIPE_DIR}/files/memfaultd.service" -t /lib/systemd/system
-install -D -m 644 "${RECIPE_DIR}/files/persist-memfaultd.toml" -t /etc/rugpi/state
+install -D -m 644 "${RECIPE_DIR}/files/persist-memfaultd.toml" -t /etc/rugix/state
 
 systemctl enable memfaultd
