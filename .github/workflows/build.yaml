@@ -25,9 +25,9 @@ jobs:
       matrix:
         job:
           - system: customized-pi5
-            hardware: rugix-rpi-arm64
+            hardware: rugix-rpi4
           - system: customized-pi4
-            hardware: rugix-rpi-arm64
+            hardware: rugix-rpi5
           - system: customized-efi-arm64
             hardware: rugix-efi-arm64
           - system: customized-efi-amd64
