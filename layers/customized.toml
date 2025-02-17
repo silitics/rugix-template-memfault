@@ -11,6 +11,8 @@ recipes = [
     "rugix-extra/avahi",
     # Install Memfault.
     "install-memfaultd",
+    # Install the Memfault Rugix OTA update service.
+    "memfault-ota-rugix",
     # Install SSH dev key.
     "install-ssh-dev-key",
     # Install a static web page.
