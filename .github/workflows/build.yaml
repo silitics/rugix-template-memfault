@@ -71,4 +71,4 @@ jobs:
             --hardware-version ${{ matrix.job.hardware }} \
             --software-type rugix-debian \
             --software-version ${{ needs.metadata.outputs.version }} \
-            build/${{ matrix.job.system }}/system.rugix
+            build/${{ matrix.job.system }}/system.rugixb
