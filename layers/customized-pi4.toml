@@ -1,4 +1,4 @@
-parent = "customized-pi"
+parent = "customized"
 
 recipes = [
     # Prepares Debian for booting on a Raspberry Pi.
