@@ -13,10 +13,8 @@ target = "generic-grub-efi"
 
 # Compatible with:
 # - Raspberry Pi 5
-# - Raspberry Pi 4 (with recent firmware)
-# - Raspberry Pi CM4 (with recent firmware)
 [systems.customized-pi5]
-layer = "customized-pi"
+layer = "customized-pi5"
 architecture = "arm64"
 target = "rpi-tryboot"
 

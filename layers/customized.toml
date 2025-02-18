@@ -10,7 +10,7 @@ recipes = [
     # Enable discovery of the system in the local network.
     "rugix-extra/avahi",
     # Install Memfault.
-    "install-memfaultd",
+    "memfaultd-install",
     # Install the Memfault Rugix OTA update service.
     "memfault-ota-rugix",
     # Install SSH dev key.
@@ -20,4 +20,4 @@ recipes = [
 ]
 
 [parameters."core/set-hostname"]
-hostname = "rugix-memfault-template"
+hostname = "rugix-template-memfault"

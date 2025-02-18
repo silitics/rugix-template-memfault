@@ -1,9 +1,16 @@
 parent = "customized-pi"
 
 recipes = [
+    # Prepares Debian for booting on a Raspberry Pi.
+    "core/rpi-debian-setup",
+    # Install Memfault configuration.
+    "memfaultd-configure",
     # Include the firmware update for Raspberry Pi 4.
     "core/rpi-include-firmware",
 ]
 
 [parameters."core/rpi-include-firmware"]
 model = "pi4"
+
+[parameters.memfaultd-configure]
+device_type = "rpi4"

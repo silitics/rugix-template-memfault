@@ -17,6 +17,14 @@ url=$(curl -f -s --get \
 exit_code=$?
 
 if [ "$exit_code" -eq 0 ] && [ -n "$url" ]; then
+    active_system=$(rugix-ctrl system info | jq -r ".boot.activeGroup")
+    if [ "$active_system" == "a" ]; then
+        rugix-ctrl slots create-index boot-a casync-64 sha512-256
+        rugix-ctrl slots create-index system-a casync-64 sha512-256
+    else
+        rugix-ctrl slots create-index boot-b casync-64 sha512-256
+        rugix-ctrl slots create-index system-b casync-64 sha512-256
+    fi
     rugix-ctrl update install --reboot no "$url"
     if [ $? -eq 0 ]; then
         # We set the reboot reason manually and then reboot using Rugix.

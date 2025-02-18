@@ -4,8 +4,8 @@ recipes = [
     # Prepares Debian for booting on a Raspberry Pi.
     "core/rpi-debian-setup",
     # Install Memfault configuration.
-    "memfaultd-config",
+    "memfaultd-configure",
 ]
 
-[parameters.memfaultd-config]
-device_type = "rpi"
+[parameters.memfaultd-configure]
+device_type = "rpi5"
