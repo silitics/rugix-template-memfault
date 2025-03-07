@@ -5,11 +5,13 @@ rugix-extra = { git = "https://github.com/silitics/rugix-extra.git", branch = "v
 layer = "customized-efi"
 architecture = "amd64"
 target = "generic-grub-efi"
+options = { use-squashfs = { no-compression = true } }
 
 [systems.customized-efi-arm64]
 layer = "customized-efi"
 architecture = "arm64"
 target = "generic-grub-efi"
+options = { use-squashfs = { no-compression = true } }
 
 # Compatible with:
 # - Raspberry Pi 5
