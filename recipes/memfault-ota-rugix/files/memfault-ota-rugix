@@ -18,6 +18,7 @@ exit_code=$?
 
 if [ "$exit_code" -eq 0 ] && [ -n "$url" ]; then
     active_system=$(rugix-ctrl system info | jq -r ".boot.activeGroup")
+    # Create slot indices for adaptive delta updates prior to the update.
     if [ "$active_system" == "a" ]; then
         rugix-ctrl slots create-index boot-a casync-64 sha512-256
         rugix-ctrl slots create-index system-a casync-64 sha512-256

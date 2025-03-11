@@ -5,20 +5,20 @@ recipes = [
     "core/set-hostname",
     # Setup and enable SSH.
     "core/ssh",
+    # Enable discovery of the system in the local network.
+    "rugix-extra/avahi",
     # Setup the network.
     "setup-network",
     # Setup time synchronization.
     "setup-timesyncd",
-    # Enable discovery of the system in the local network.
-    "rugix-extra/avahi",
-    # Install Memfault.
-    "memfaultd-install",
-    # Install the Memfault Rugix OTA update service.
-    "memfault-ota-rugix",
     # Install SSH dev key.
     "install-ssh-dev-key",
     # Install a static web page.
     "hello-world",
+    # Install Memfault.
+    "memfaultd",
+    # Install the Memfault Rugix OTA update service.
+    "memfault-ota-rugix",
 ]
 
 [parameters."core/set-hostname"]

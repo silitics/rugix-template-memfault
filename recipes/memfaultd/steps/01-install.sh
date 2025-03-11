@@ -4,10 +4,10 @@ set -euo pipefail
 
 case "${RUGIX_ARCH}" in
     "amd64")
-        TARGET="x86_64-unknown-linux-musl"
+        TARGET="x86_64-unknown-linux-gnu"
         ;;
     "arm64")
-        TARGET="aarch64-unknown-linux-musl"
+        TARGET="aarch64-unknown-linux-gnu"
         ;;
     *)
         echo "Unsupported architecture '${RUGIX_ARCH}'."

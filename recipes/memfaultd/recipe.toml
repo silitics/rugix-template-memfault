@@ -1,4 +1,4 @@
-description = "install-memfaultd"
+description = "install memfaultd"
 
 [parameters]
 version = { default = "1.18.0" }

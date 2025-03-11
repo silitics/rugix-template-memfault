@@ -1,5 +1,5 @@
 [Unit]
-Description=memfaultd daemon
+Description=memfaultd
 After=local-fs.target network.target dbus.service
 
 [Service]
