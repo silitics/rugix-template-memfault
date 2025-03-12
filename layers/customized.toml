@@ -5,14 +5,13 @@ recipes = [
     "core/set-hostname",
     # Setup and enable SSH.
     "core/ssh",
-    # Enable discovery of the system in the local network.
+    # Enable system discovery in the local network.
     "rugix-extra/avahi",
-    # Setup the network.
-    "setup-network",
-    # Setup time synchronization.
-    "setup-timesyncd",
-    # Install SSH dev key.
-    "install-ssh-dev-key",
+    # Setup network and time synchronization.
+    "rugix-extra/debian-setup-network",
+    "rugix-extra/debian-setup-timesyncd",
+    # Install dev SSH keys from `.env` file.
+    "rugix-extra/dev-local-ssh-keys",
     # Install a static web page.
     "hello-world",
     # Install Memfault.
