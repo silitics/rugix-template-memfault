@@ -7,5 +7,5 @@ recipes = [
     "memfaultd-config",
 ]
 
-[parameters.memfaultd-configure]
+[parameters.memfaultd-config]
 device_type = "efi"

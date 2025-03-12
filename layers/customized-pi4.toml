@@ -12,5 +12,5 @@ recipes = [
 [parameters."core/rpi-include-firmware"]
 model = "pi4"
 
-[parameters.memfaultd-configure]
+[parameters.memfaultd-config]
 device_type = "rpi4"
