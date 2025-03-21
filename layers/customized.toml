@@ -12,6 +12,8 @@ recipes = [
     "rugix-extra/debian-setup-timesyncd",
     # Install dev SSH keys from `.env` file.
     "rugix-extra/dev-local-ssh-keys",
+    # Auto commit to the currently booted version.
+    "rugix-extra/rugix-systemd-auto-commit",
     # Install a static web page.
     "hello-world",
     # Install Memfault.
