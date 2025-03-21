@@ -2,6 +2,8 @@
 
 This template showcases how to set up a [Rugix](https://rugix.org) project for use with [Memfault](https://memfault.com/).
 
+Check out the [corresponding Interrupt article to find out more](https://interrupt.memfault.com/blog/robust-ota-updates-the-easy-way).
+
 ## Usage
 
 ### Setup
